@@ -122,17 +122,17 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="example1.c">
+    <None Include="Project[2]_[6].c">
       <SubType>compile</SubType>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="example1_7.c">
+    <None Include="Project[2]_[7].c">
       <SubType>compile</SubType>
     </None>
-    <None Include="example1_8.c">
+    <Compile Include="Project[2]_[8].c">
       <SubType>compile</SubType>
-    </None>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
