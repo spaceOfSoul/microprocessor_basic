@@ -4,10 +4,11 @@
  * Created: 2023-10-07 오후 4:58:33
  * Author : 유창현
  */ 
+#define F_CPU 16000000L
+
 
 #include <avr/io.h>
 #include <util/delay.h>
-#define F_CPU 16000000L;
 #define _BV(bit) (1 << (bit))
 
 uint8_t switch_hit(void);
@@ -16,23 +17,24 @@ int main(void)
 {
 	uint8_t i = 0;
 	uint8_t direction = 0; // 0 : forward, 1: reverse
-	uint8_t led_pattern[4] = {_BV(PC3) | _BV(PC2), _BV(PC2) | _BV(PC1), _BV(PC1) | _BV(PC0), _BV(PC0) | _BV(PC3)};
+	uint8_t led_pattern[4] = { _BV(PC1) | _BV(PC0),  _BV(PC2) | _BV(PC1),  _BV(PC3) | _BV(PC2),  _BV(PC0) | _BV(PC3)};
 	
 	DDRC = _BV(PC3) | _BV(PC2) | _BV(PC1) | _BV(PC0); // C 포트의 하위 4개 핀을 출력 모드로 설정
 	PORTE = _BV(PE7); // E 포트의 7번 핀을 pull-up 상태로 설정
 	PORTC = _BV(PC2) | _BV(PC1); // C 포트의 2번 핀과 1번 핀을 HIGH 상태로 설정
 
 	while(1) {
-		_delay_ms(500);
-		PORTC ^= (PORTC & 0xf0) | led_pattern[i]; // 패턴 순환
+		_delay_ms(1000);
+		PORTC = (PORTC & 0xf0) | led_pattern[i]; // 패턴 순환
+		if(switch_hit())
+			direction = !direction;
+		
 		if(direction){
-			i--;
-			i = i%4;
+			i = (i == 0) ? 3 : i - 1;
 		}else{
 			i++;
 			i = i%4;
 		}
-		direction = !direction;
 	}
 }
 
