@@ -131,7 +131,12 @@
     <None Include="Project[3]_[3].c">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="Project[3]_[5].c">
+    <None Include="Project[3]_[5].c">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Project[3]_[6].c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
