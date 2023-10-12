@@ -10,7 +10,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-
 // PORTC
 #define LED1 PC0
 #define LED2 PC1
@@ -24,7 +23,5 @@
 #define SW5 PD5
 // PORTE
 #define SW2 PE7
-
-#define _BV(bit) 1<<(bit)
 
 void ioport_init(void);

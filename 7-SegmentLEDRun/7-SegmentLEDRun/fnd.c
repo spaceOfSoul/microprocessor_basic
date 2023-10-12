@@ -56,17 +56,17 @@ void fnd_init(void)
  * -------------------------------------------------------------------------- */
 void fnd_write(uint8_t fnd_num, uint8_t value)
 {
-    uint8_t sreg;
-    
-    sreg = SREG;            // save SREG
-    cli();                  // disable interrupt to prevent shared-data problem
+	uint8_t sreg;
+	
+	sreg = SREG;            // save SREG
+	cli();                  // disable interrupt to prevent shared-data problem
 
-    fnd_select(fnd_num);
-    PORTC = value;
-    fnd_deselect();
+	fnd_select(fnd_num);
+	PORTC = value;
+	fnd_deselect();
 
-    if(sreg&0x80)           // if global interrupt was enabled before executing cli()
-        sei();              // enable interrupt        
+	if(sreg&0x80)           // if global interrupt was enabled before executing cli()
+	sei();              // enable interrupt
 }
 
 /* ----------------------------------------------------------------------------
@@ -111,6 +111,18 @@ void fnd_write_number(uint8_t fnd_num, uint8_t num, uint8_t dot_on)
  * arguments
  *  - num: number to display on the FNDs (0 ~ 999)
  * -------------------------------------------------------------------------- */
+//void fnd_write_numbers(uint16_t num){
+	//uint8_t first, second, last;
+	//first = num/100; // hundreds
+	//second = (num%100)/10; // tens
+	//last = num%10; // ones
+	//
+	//// write FND
+	//fnd_write_number(2, first, 0);
+	//fnd_write_number(1, second, 0);
+	//fnd_write_number(0, last, 0);
+//}
+
 void fnd_write_numbers(uint16_t num){
 	uint8_t first, second, last;
 	first = num/100; // hundreds
@@ -118,9 +130,19 @@ void fnd_write_numbers(uint16_t num){
 	last = num%10; // ones
 	
 	// write FND
-	fnd_write_number(2, first, 0);
-	fnd_write_number(1, second, 0);
-	fnd_write_number(0, last, 0);
+	if(10>num){
+		fnd_write(1,0x00);
+		fnd_write(2,0x00);
+		fnd_write_number(0, last, 0);
+	}else if(100>num){
+		fnd_write(2,0x00);
+		fnd_write_number(0, last, 0);
+		fnd_write_number(1, second, 0);
+	}else{
+		fnd_write_number(2, first, 0);
+		fnd_write_number(1, second, 0);
+		fnd_write_number(0, last, 0);
+	}
 }
 
 /* ----------------------------------------------------------------------------

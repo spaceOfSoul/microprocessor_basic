@@ -7,6 +7,7 @@
 
 #include "board.h"
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 void ioport_init(void){
 	DDRC = _BV(LED1) | _BV(LED2) | _BV(LED3) | _BV(LED4); // DDRC를 출력으로
