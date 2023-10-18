@@ -6,9 +6,9 @@
  */ 
 
 #include "board.h"
-#include "fnd.h"
-
+#include <avr/io.h>
 #include <util/delay.h>
+#include "fnd.h"
 
 uint8_t SW2_hit(void);
 uint8_t SW3_hit(void);
@@ -19,7 +19,6 @@ int main(void)
 	fnd_init();
 	uint16_t i = 0;
 	uint8_t increase = 1;
-	uint8_t color = 0;
 	while (1)
 	{
 		if(i == 1000) {
@@ -32,8 +31,7 @@ int main(void)
 			
 		if(SW3_hit()){
 			i = 0;
-			PORTB = _BV(LED_COLOR) & (color * _BV(LED_COLOR));
-			color = !color;
+			PORTB ^= _BV(LED_COLOR);
 		}
 		fnd_write_numbers(i); // 숫자 표시
 		
@@ -80,3 +78,12 @@ uint8_t SW3_hit(void)
 		return 0;
 }
 
+void ioport_init(void){
+	DDRC = _BV(LED1) | _BV(LED2) | _BV(LED3) | _BV(LED4); // DDRC를 출력으로
+	PORTC = _BV(LED1) | _BV(LED2) | _BV(LED3) | _BV(LED4); // LED를 모두 끈다.
+	
+	PORTE = _BV(SW2); // MCU 보드의 SW2가 연결된 Pin의 내부 pull-up 저항을 Enable 시킨다.
+	
+	// 확장 보드의 SW3, SW4, SW5가 연결된 pin의 내부 pull-up 저항을 Enable 시킨다.
+	PORTD = _BV(SW3) |_BV(SW4) |_BV(SW5);
+}
