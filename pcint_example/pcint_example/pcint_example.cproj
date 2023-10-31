@@ -12,18 +12,18 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>extern_interrupt_example</AssemblyName>
-    <Name>extern_interrupt_example</Name>
-    <RootNamespace>extern_interrupt_example</RootNamespace>
+    <AssemblyName>pcint_example</AssemblyName>
+    <Name>pcint_example</Name>
+    <RootNamespace>pcint_example</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -131,21 +131,18 @@
     <Compile Include="fnd.h">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="Project[5]_[5].c">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Project[5]_[6].c">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Project[5]_[7].c">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Project[5]_[8].c">
-      <SubType>compile</SubType>
-    </None>
-    <Compile Include="Project[5]_[9].c">
+    <Compile Include="project[6]_[9].c">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="project[6]_[6].c">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Project[6]_[7][.c">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="project[6]_[1].c">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
