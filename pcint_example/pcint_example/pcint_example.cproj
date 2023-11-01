@@ -140,7 +140,7 @@
     <None Include="Project[6]_[7][.c">
       <SubType>compile</SubType>
     </None>
-    <None Include="project[6]_[1].c">
+    <None Include="project[6]_[5].c">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

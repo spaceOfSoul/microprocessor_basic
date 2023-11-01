@@ -24,32 +24,29 @@ uint8_t led_patterns[] = { 0x81, 0xc3, 0xe7, 0xff, 0x7e, 0x3c, 0x18, 0x00};
 
 ISR(PCINT0_vect)
 {
-	static uint8_t prev_pb5 = _BV(PINB5);
-	static uint8_t prev_pb6 = _BV(PINB6);
+	static uint8_t prev_pb5 = _BV(PINB5); // 각 스위치들의 이전 상태
+	static uint8_t prev_pb6 = _BV(PINB6); 
 	
 	uint8_t cur_state_5 = PINB & _BV(PINB5);
 	uint8_t cur_state_6 = PINB & _BV(PINB6);
 	
 	if(cur_state_5!=prev_pb5){
-		prev_pb5=cur_state_5;
-		
-		if(!cur_state_5){
+		if(cur_state_5){
 			fnd_num++;  // FND숫자 증가
 			if(fnd_num == 1000)
 				fnd_num = 0;
 		}
-	}else
-		fnd_write_numbers(fnd_num);
-	if(cur_state_6!=prev_pb6){
-		prev_pb6=cur_state_6;
-		if(!cur_state_6){
+		prev_pb5=cur_state_5;
+	}else if(cur_state_6!=prev_pb6){
+		if(cur_state_6){
 			if(fnd_num == 0) // 0일 경우 999에서 내려오도록 제한
 				fnd_num = 999;
 			else
 				fnd_num--;
 		}
-	}else
-		fnd_write_numbers(fnd_num);
+		prev_pb6=cur_state_6;
+	}
+	fnd_write_numbers(fnd_num);
 }
 
 
