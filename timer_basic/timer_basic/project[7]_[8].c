@@ -29,7 +29,7 @@ void interrupt_init(){
 
 void ioport_init(void)
 {
-	DDRE = _BV(PE3);	// PE3 outout으로 설정
+	DDRE = _BV(SOUND_OUT);	// PE3 outout으로 설정
 	DDRB = _BV(PB5);		// PE5 outout으로 설정
 }
 

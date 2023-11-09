@@ -35,10 +35,10 @@ void interrupt_init(){
 void ioport_init(void)
 {
 	DDRE = _BV(PE3);	// PE3 outout으로 설정
-	DDRB = _BV(PB5);		// PE5 outout으로 설정
+	DDRB = _BV(SOUND_OUT);		// PE5 outout으로 설정
 }
 
-ISR(TIMER5_OVF_vect)
+ISR(TIMER5_COMPA_vect)
 {
 	TCNT5 = 0xF63B;
 	PORTB ^= _BV(PB5);	// PB5 반전
