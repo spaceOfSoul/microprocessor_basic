@@ -18,6 +18,7 @@ void sound_mute(void)
 	TCCR3B &= ~(_BV(CS31));
 	
 	// SOUND_OUT이 설정되어 있다면 FOC3A를 설정하여 강제 비교 일치를 발생
-	//if(PINE & _BV(SOUND_OUT))
-		//TCCR3C |= _BV(FOC3A);
+	if(PINE & _BV(SOUND_OUT)){
+		TCCR3C |= _BV(FOC3A);
+	}
 }

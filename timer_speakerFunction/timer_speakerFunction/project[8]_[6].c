@@ -22,7 +22,7 @@
 uint16_t fnd_value = 0;
 uint8_t note_index;
 uint8_t music_start = 0;
-uint16_t array_size =  sizeof(m_notes) / sizeof(uint8_t);
+uint16_t array_size =  sizeof(m_notes) / sizeof(uint16_t); // 악보의 길아
 
 void timer_init(void) {
 	// Timer3 CTC mode
@@ -71,8 +71,7 @@ ISR(TIMER5_COMPA_vect){
 	}
 
 	// write number
-	//fnd_write_numbers(fnd_value);
-	fnd_write_numbers(note_index);
+	fnd_write_numbers(fnd_value);
 }
 
 int main(void)
@@ -87,11 +86,14 @@ int main(void)
     while (1) 
     {
 		if(music_start){
-			sound_set_frequency(m_notes[note_index]);
-			
-			_delay_ms(m_duration[note_index] * music_tempo);
+			if(m_notes[note_index] != 0){ // 소리가 날시
+				sound_set_frequency(m_notes[note_index]);
+			} else { // 소리가 나지 않을 시
+				sound_mute();
+			}
+			_delay_ms(m_duration[note_index] * 95);
 			note_index++;
-			if(note_index == array_size){
+			if(note_index == array_size){ // 노트 인덱스 초기화
 				note_index = 0;
 			}
 		}else{

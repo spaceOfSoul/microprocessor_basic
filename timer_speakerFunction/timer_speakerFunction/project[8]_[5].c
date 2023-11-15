@@ -9,7 +9,7 @@
 #define PRESCALER 64
 #define TIMER3_COMPARE_VALUE 250
 #define TIMER5_COMPARE_VALUE (F_CPU / (PRESCALER * 10))
-#define __DELAY_BACKWARD_COMPATIBLE__
+#define __DELAY_BACKWARD_COMPATIBLE__ // 딜레이의 매개인자로 변수를 넘기기 위함.
 #define _BV(n) (1<<n)
 
 #include "board.h"
@@ -21,7 +21,7 @@
 
 uint16_t fnd_value = 0;
 uint8_t note_index = 0;
-uint16_t array_size =  sizeof(m_notes) / sizeof(uint8_t);
+uint16_t array_size =  sizeof(m_notes) / sizeof(uint16_t); // 악보의 길아
 
 void timer_init(void) {
 	// Timer3 CTC mode
@@ -73,15 +73,18 @@ int main(void)
     interrupt_init();
     fnd_write_numbers(0);
 	
-	
 	uint8_t count = 0;
 
     while (1) 
     {
-		sound_set_frequency(m_notes[note_index]);
+		if(m_notes[note_index] != 0){ // 소리가 날시
+			sound_set_frequency(m_notes[note_index]);
+		} else { // 소리가 나지 않을 시
+			sound_mute();
+		}
 		_delay_ms(m_duration[note_index] * 95);
 		note_index++;
-		if(note_index == array_size){
+		if(note_index == array_size){ // 노트 인덱스 초기화
 			note_index = 0;
 		}
     }
