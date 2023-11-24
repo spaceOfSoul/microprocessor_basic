@@ -47,7 +47,7 @@ void timer_init(void)
 	OCR3A = 500; // Duty Cycle 50%
 
 	// Timer5 설정: CTC 모드, Prescaler = 8
-	TCCR5A = _BV(COM5A1); // CTC 모드 설정
+	TCCR5A = 0; // CTC 모드 설정
 	TCCR5B = _BV(WGM52) | _BV(CS51); // Prescaler = 8
 	TIMSK5 = _BV(OCIE5A); // OCR5A 비교 일치 인터럽트 활성화
 	OCR5A = F_CPU/(8*256*4-1); ; // 256×4 Hz 주파수 설정
