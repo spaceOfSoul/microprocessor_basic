@@ -7,11 +7,7 @@
 
 #include <avr/io.h>
 
-#ifndef SOUND_H
-#define SOUND_H
 #define F_CPU 16000000L
 
 void sound_set_frequency(uint16_t freq_hz);
 void sound_mute(void);
-
-#endif

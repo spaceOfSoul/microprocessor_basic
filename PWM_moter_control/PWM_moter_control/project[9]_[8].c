@@ -45,7 +45,6 @@ void timer_init(void)
 	TCCR3B = _BV(WGM33) | _BV(CS31); // Prescaler = 8
 	ICR3 = 1000; // 1 KHz 주파수 설정
 	OCR3A = 500; // Duty Cycle 50%
-	set_timer3_dutycycle(0);
 
 	// Timer5 설정: CTC 모드, Prescaler = 8
 	TCCR5A = _BV(COM5A1); // CTC 모드 설정
@@ -85,7 +84,7 @@ int main(void)
 	 uint8_t led_patterns[] = { 0x81, 0xc3, 0xe7, 0xff, 0x7e, 0x3c, 0x18, 0x00};
 	 uint8_t pattern_num = 0;
 	 uint8_t pattern = 0;
-	 set_timer3_dutycycle(80);
+	 set_timer3_dutycycle(80); // 추가된 부분
 	 
 	 while (1)
 	 {

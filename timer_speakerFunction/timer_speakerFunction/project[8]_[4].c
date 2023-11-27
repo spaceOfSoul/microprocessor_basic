@@ -11,6 +11,7 @@
 #define TIMER5_COMPARE_VALUE (F_CPU / (PRESCALER * 10))
 #define _BV(n) (1<<n)
 
+#include "sound.h"
 #include "board.h"
 #include "fnd.h"
 #include "musical_notes.h"

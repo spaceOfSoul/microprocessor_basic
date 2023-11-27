@@ -4,6 +4,7 @@
  * Created: 2023-11-08 오후 9:31:33
  *  Author: 유창현
  */ 
+#include "sound.h"
 #include "board.h"
 
 void sound_set_frequency(uint16_t freq_hz)

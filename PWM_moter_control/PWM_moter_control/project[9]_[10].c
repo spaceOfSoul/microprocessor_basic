@@ -52,7 +52,6 @@ void timer_init(void)
 	TCCR3A = _BV(COM3A1) | _BV(WGM31); // Mode 10: Phase Correct PWM
 	TCCR3B = _BV(WGM33) | _BV(CS31); // Prescaler = 8
 	ICR3 = 1000; // 1 KHz 주파수 설정
-	OCR3A = 500; // Duty Cycle 50%
 	set_timer3_dutycycle(dutyCycle_value);
 
 	// Timer5 설정: CTC 모드, Prescaler = 8

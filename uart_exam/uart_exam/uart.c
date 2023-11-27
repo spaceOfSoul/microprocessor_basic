@@ -6,9 +6,9 @@
  */ 
 #include "board.h"
 #include <avr/io.h>
-#define BAUDRATE 115200L
 
 void uart_init(void) {
+	#define BAUDRATE 115200L
 	UBRR0 = (F_CPU/8.)/BAUDRATE - 0.5;  // UBRR0H 설정
 
 	UCSR0A |= _BV(U2X0);  // U2X0를 1로 설정
