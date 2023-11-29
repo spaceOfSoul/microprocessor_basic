@@ -9,10 +9,6 @@
 #include "uart.h"
 #include <avr/io.h>
 
-void ioport_init(){
-	DDRE = _BV(PE0);
-}
-
 int main(void)
 {
 	uart_init();
@@ -20,7 +16,11 @@ int main(void)
 	uint8_t ch;
     while(1) {
 	    ch = uart_getch();
-	    uart_putch(ch);
+
+		if(ch == 0x0D){ // 000 1101
+			uart_putch('\n');
+		}
+		uart_putch(ch);
     }
 }
 

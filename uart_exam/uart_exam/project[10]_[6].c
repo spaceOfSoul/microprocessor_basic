@@ -9,10 +9,6 @@
 #include "uart.h"
 #include <avr/io.h>
 
-void ioport_init(){
-	DDRE = _BV(PE0);
-}
-
 int main(void)
 {
 	uart_init();

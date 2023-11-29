@@ -6,13 +6,12 @@
  */ 
 
 #include "board.h"
-//#include "fnd.h"
 #include "uart.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-ISR(USART0_RX_vect){
-	UDR0 = UDR0;
+ISR(USART0_RX_vect){ // 수신 버퍼를 비움
+	UDR0 = UDR0; // data bus를 태움
 }
 
 int main(void)
@@ -20,8 +19,6 @@ int main(void)
 	uart_init();
 	sei();
 
-	fdevopen(uart_putch, uart_getch);
-	
 	while(1);
 }
 
