@@ -13,7 +13,7 @@ void uart_init(void) {
 
 	UCSR0A |= _BV(U2X0);  // U2X0를 1로 설정
 
-	UCSR0B = _BV(RXEN0) | _BV(TXEN0) | _BV(RXCIE0);   // 수신과 송신 enable
+	UCSR0B = _BV(RXEN0) | _BV(TXEN0) | _BV(RXCIE0);   // 수신과 송신 enable, 수신완료 인터럽트 활성화
 	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); // 8 데이터 비트, 1 스톱 비트, no parity
 }
 

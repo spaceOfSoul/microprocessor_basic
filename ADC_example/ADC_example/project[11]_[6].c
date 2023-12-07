@@ -13,11 +13,23 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+uint16_t adc_val = 0;;
+
 void ioport_init(){
 	DDRC = _BV(LED1) | _BV(LED2) | _BV(LED3) | _BV(LED4); // DDRC를 출력으로
 	PORTC = _BV(LED1) | _BV(LED2) | _BV(LED3) | _BV(LED4); // LED를 모두 끈다.
 	
 	PORTD = _BV(SW3);
+}
+
+ISR(USART0_RX_vect){
+	if(uart_getch()==0x61){
+		adc_get_result(3);
+	}
+}
+
+ISR(ADC_vect){
+	fnd_write_numbers(ADC);
 }
 
 int main(void)

@@ -24,9 +24,7 @@ void adc_init(void) {
 	// ADC clock prescaler 설정: 16MHz / 128 = 125 KHz
 	ADCSRA |= _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0);
 	
-	 // Free Running 모드 설정
-    //ADCSRA |= _BV(ADATE);
-	ADCSRA |= _BV(ADIE);
+	ADCSRA |= _BV(ADIE); // adc interrupt activate
 }
 
 uint16_t adc_get_result(uint8_t channel_num) {

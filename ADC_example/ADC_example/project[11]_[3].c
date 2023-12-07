@@ -31,7 +31,7 @@ int main(void)
     while (1) 
     {
 		if(!(PIND & _BV(SW3))){
-			result = adc_get_result(3);
+			result = adc_get_result(1);
 			printf("adc result : %d \n", result);
 			//fnd_write_numbers(result);
 		}
